@@ -89,17 +89,45 @@ for i in range(0, 99) :
 
 
 for i in range(0,gameCounter) :
+ if(gameObjects[i].status=="Success"):
     for j in range(0,4) :
         if(gameObjects[i].missedSequence[j]==0):
             gameObjects[i].Score+=mappings[gameObjects[i].word[j]]
-            
+    if(gameObjects[i].No_request>0):
+        gameObjects[i].Score /=gameObjects[i].No_request
+    if(gameObjects[i].BadGuesses>0) :
+        value=(gameObjects[i].Score/100)*(gameObjects[i].BadGuesses*10)
+        gameObjects[i].Score-=value
+ else:
+     for j in range(0, 4):
+         if (gameObjects[i].missedSequence[j] == 0):
+            gameObjects[i].Score += mappings[gameObjects[i].word[j]]
 
+     gameObjects[i].Score=-(gameObjects[i].Score );
 
+     if (gameObjects[i].No_request > 0):
+         gameObjects[i].Score *= gameObjects[i].No_request
+     if (gameObjects[i].BadGuesses > 0):
+         value = (gameObjects[i].Score / 100) * (gameObjects[i].BadGuesses * 10)
+         gameObjects[i].Score -= value
 
-
+print("Game",end="        ")
+print("Word",end="        ")
+print("Status", end="        ")
+print("Bad Guesses", end="        ")
+print("Missed Letters", end="        ")
+print("Score")
+print("____", end="        ")
+print("____", end="        ")
+print("______", end="        ")
+print("___________", end="        ")
+print("______________", end="        ")
+print("_____")
 for i in range(0,gameCounter):
-    print(gameObjects[i].word ,end=" ")
-    print(gameObjects[i].status, end=" ")
-    print(gameObjects[i].BadGuesses, end=" ")
-    print(gameObjects[i].MissedLetters, end=" ")
+    print(i+1,end="           ")
+    print(gameObjects[i].word ,end="        ")
+    print(gameObjects[i].status, end="       ")
+    print(gameObjects[i].BadGuesses, end="                  ")
+    print(gameObjects[i].MissedLetters, end="                     ")
+    print(gameObjects[i].Score, end="        ")
     print()
