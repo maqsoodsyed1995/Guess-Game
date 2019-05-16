@@ -3,7 +3,34 @@ from game import game
 import random
 wordList=stringDatabase()
 gameObjects=[game()for i in range(0,99)]
-
+mappings ={
+"a" :8.17,
+"b" :1.49,
+"c" :2.78,
+"d" :4.25,
+"e" :12.70,
+"f" :2.23,
+"g" :2.02,
+"h" :6.09,
+"i" :6.97,
+"j" :0.15,
+"k" :0.77,
+"l" :4.03,
+"m" :2.41,
+"n" :6.75,
+"o" :7.51,
+"p" :1.93,
+"q" :0.10,
+"r" :5.99,
+"s" :6.33,
+"t" :9.06,
+"u" :2.76,
+"v" :0.98,
+"w" :2.36,
+"x" :0.15,
+"y":1.97,
+"z" :0.07
+}
 print('** The great guessing game **')
 
 gameCheck=True
@@ -46,8 +73,9 @@ for i in range(0, 99) :
             for k in range(0,4):
                 if(guess==gameObjects[i].word[k]) :
                     boolList[k]=2
+                    gameObjects[i].missedSequence[k]=1
                     request_check=False
-                    gameObjects[i].MissedLetters-=gameObjects[i].MissedLetters
+                    gameObjects[i].MissedLetters-=1
             if(request_check) :
                 gameObjects[i].No_request+=1
         elif(choice=="t"):
@@ -58,6 +86,16 @@ for i in range(0, 99) :
             gameObjects[i].status = "Gave up"
             check=False
             gameCheck=False
+
+
+for i in range(0,gameCounter) :
+    for j in range(0,4) :
+        if(gameObjects[i].missedSequence[j]==0):
+            gameObjects[i].Score+=mappings[gameObjects[i].word[j]]
+            
+
+
+
 
 for i in range(0,gameCounter):
     print(gameObjects[i].word ,end=" ")

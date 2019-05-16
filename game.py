@@ -5,3 +5,4 @@ class game:
     MissedLetters=4
     Score=0.0
     No_request=0
+    missedSequence=[0,0,0,0]
