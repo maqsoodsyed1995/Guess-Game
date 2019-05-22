@@ -1,3 +1,6 @@
+"""
+This file contains the main logic of the program
+"""
 from stringDatabase import stringDatabase
 from game import game
 import random
@@ -39,7 +42,8 @@ for i in range(0, 99) :
  if (gameCheck):
     gameCounter+=1
     gameObjects[i].word=wordList.list[random.randint(0,4029)]
-    print(gameObjects[i].word)
+    #gameObjects[i].word="dipt"
+    #print(gameObjects[i].word)
     boolList=[0,0,0,0]
     check=True
     while check :
@@ -59,7 +63,8 @@ for i in range(0, 99) :
             elif(boolList[j]==0) :
                 print("_",end=" ")
         print()
-        choice=input("g = guess, t = tell me, l for a letter, and q to quit")
+        choice=input("g = guess, t = tell me, l for a letter, and q to quit \n")
+
         if(choice=="g") :
             guess=input()
             if(guess==gameObjects[i].word) :
@@ -68,7 +73,7 @@ for i in range(0, 99) :
             else:
                 gameObjects[i].BadGuesses+=1
         elif(choice=="l") :
-            guess = input("Enter a letter:")
+            guess = input("Enter a letter: \n")
             request_check=True
             for k in range(0,4):
                 if(guess==gameObjects[i].word[k]) :
@@ -79,10 +84,14 @@ for i in range(0, 99) :
             if(request_check) :
                 gameObjects[i].No_request+=1
         elif(choice=="t"):
+            print("the word is" ,end=" ")
             print(gameObjects[i].word)
+
             gameObjects[i].status="Gave up"
             check=False
         elif(choice=="q"):
+            print("the word is", end=" ")
+            print(gameObjects[i].word)
             gameObjects[i].status = "Gave up"
             check=False
             gameCheck=False
@@ -131,3 +140,11 @@ for i in range(0,gameCounter):
     print(gameObjects[i].MissedLetters, end="                     ")
     print(gameObjects[i].Score, end="        ")
     print()
+
+sum=0
+
+for i in range(0,gameCounter):
+    sum+=gameObjects[i].Score
+
+print("Final Score " )
+print(sum)
